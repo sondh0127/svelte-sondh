@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { spring } from 'svelte/motion';
 
-	let count = 0;
+	export let count = 1;
 
 	const displayed_count = spring();
 	$: displayed_count.set(count);

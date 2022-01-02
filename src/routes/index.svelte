@@ -7,12 +7,12 @@
 	import supabase from '$lib/supabase';
 	import type { definitions } from 'src/types/supabase';
 
-	async function load() {
-		const res = await supabase.from<definitions['overlays']>("overlays").select("*")
-    console.log('[LOG] ~ file: index.svelte ~ line 12 ~ res', res)
-	}
+	let page = 1;
+	let perPage = 5;
 
-	load()
+	$: from = (page - 1) * perPage;
+	$: to = page * (perPage - 1);
+	$: promise = supabase.from<definitions['overlays']>('overlays').select('*').range(from, to);
 </script>
 
 <svelte:head>
@@ -30,12 +30,22 @@
 
 		to your new<br />SvelteKit app
 	</h1>
-
+	{#await promise}
+		<div>Loading ...</div>
+	{:then { data }}
+		{#each data as item, i (i)}
+			<div>
+				{JSON.stringify(item, null, 2)}
+			</div>
+		{/each}
+	{:catch error}
+		<div>Error ...</div>
+	{/await}
 	<h2>
 		try editing <strong>src/routes/index.svelte</strong>
 	</h2>
 
-	<Counter />
+	<Counter bind:count={page} />
 </section>
 
 <style>
