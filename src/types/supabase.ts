@@ -16,6 +16,9 @@ export interface paths {
     get: {
       parameters: {
         query: {
+          id?: parameters["rowFilter.overlays.id"];
+          created_at?: parameters["rowFilter.overlays.created_at"];
+          name?: parameters["rowFilter.overlays.name"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -65,6 +68,11 @@ export interface paths {
     };
     delete: {
       parameters: {
+        query: {
+          id?: parameters["rowFilter.overlays.id"];
+          created_at?: parameters["rowFilter.overlays.created_at"];
+          name?: parameters["rowFilter.overlays.name"];
+        };
         header: {
           /** Preference */
           Prefer?: parameters["preferReturn"];
@@ -77,6 +85,11 @@ export interface paths {
     };
     patch: {
       parameters: {
+        query: {
+          id?: parameters["rowFilter.overlays.id"];
+          created_at?: parameters["rowFilter.overlays.created_at"];
+          name?: parameters["rowFilter.overlays.name"];
+        };
         body: {
           /** overlays */
           overlays?: definitions["overlays"];
@@ -95,7 +108,21 @@ export interface paths {
 }
 
 export interface definitions {
-  overlays: { [key: string]: unknown };
+  overlays: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /** Format: text */
+    name: string;
+  };
 }
 
 export interface parameters {
@@ -124,6 +151,12 @@ export interface parameters {
   limit: string;
   /** @description overlays */
   "body.overlays": definitions["overlays"];
+  /** Format: bigint */
+  "rowFilter.overlays.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.overlays.created_at": string;
+  /** Format: text */
+  "rowFilter.overlays.name": string;
 }
 
 export interface operations {}
