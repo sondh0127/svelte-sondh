@@ -21,7 +21,10 @@ const config = {
 						presetUno(),
 					]
 				})
-			]
+			],
+			server: {
+				port: 4000,
+			}
 		}
 	},
 };

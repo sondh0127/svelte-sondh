@@ -4,6 +4,15 @@
 
 <script lang="ts">
 	import Counter from '$lib/Counter.svelte';
+	import supabase from '$lib/supabase';
+	import type { definitions } from 'src/types/supabase';
+
+	async function load() {
+		const res = await supabase.from<definitions['overlays']>("overlays").select("*")
+    console.log('[LOG] ~ file: index.svelte ~ line 12 ~ res', res)
+	}
+
+	load()
 </script>
 
 <svelte:head>
