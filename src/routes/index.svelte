@@ -6,6 +6,7 @@
 	import Counter from '$lib/Counter.svelte';
 	import supabase from '$lib/supabase';
 	import type { definitions } from 'src/types/supabase';
+	import { onMount } from 'svelte';
 
 	let page = 1;
 	let perPage = 5;
@@ -13,6 +14,42 @@
 	$: from = (page - 1) * perPage;
 	$: to = page * (perPage - 1);
 	$: promise = supabase.from<definitions['overlays']>('overlays').select('*').range(from, to);
+
+	let user;
+	function getUser() {
+		user = supabase.auth.user();
+	}
+
+	onMount(() => {
+		getUser();
+	});
+
+	let email: string = 'sondh0127@gmail.com';
+	let password: string = 'secret@123';
+
+	let signInRes;
+	async function signInWithEmail() {
+		signInRes = await supabase.auth.signIn({
+			email: email,
+			password: password
+		});
+		getUser();
+	}
+
+	let signUpRes;
+	async function signUpWithEmail() {
+		if (!email || !password) return;
+		signUpRes = await supabase.auth.signUp({
+			email,
+			password
+		});
+		getUser();
+	}
+
+	async function signOut() {
+		await supabase.auth.signOut();
+		getUser();
+	}
 </script>
 
 <svelte:head>
@@ -30,6 +67,7 @@
 
 		to your new<br />SvelteKit app
 	</h1>
+
 	{#await promise}
 		<div>Loading ...</div>
 	{:then { data }}
@@ -40,12 +78,27 @@
 		{/each}
 	{:catch error}
 		<div>Error ...</div>
+		<div>{JSON.stringify(error)}</div>
 	{/await}
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
 	<Counter bind:count={page} />
+
+	<div>
+		User:
+		<pre>{JSON.stringify(user, null, 2)}</pre>
+	</div>
+	<div class="flex flex-col items-start	 justify-center">
+		<div>
+			<label for="email"> Email: </label>
+			<input id="email" bind:value={email} />
+		</div>
+		<div>
+			<label for="password"> Password: </label>
+			<input id="password" bind:value={password} />
+		</div>
+	</div>
+	<button on:click={signUpWithEmail}> SignUp </button>
+	<button on:click={signInWithEmail}> SignIn </button>
+	<button on:click={signOut}> SignOut </button>
 </section>
 
 <style>
