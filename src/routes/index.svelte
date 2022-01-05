@@ -7,6 +7,7 @@
 	import supabase from '$lib/supabase';
 	import type { definitions } from 'src/types/supabase';
 	import { onMount } from 'svelte';
+	import { Button } from 'carbon-components-svelte';
 
 	let page = 1;
 	let perPage = 5;
@@ -68,20 +69,6 @@
 		to your new<br />SvelteKit app
 	</h1>
 
-	{#await promise}
-		<div>Loading ...</div>
-	{:then { data }}
-		{#each data as item, i (i)}
-			<div>
-				{JSON.stringify(item, null, 2)}
-			</div>
-		{/each}
-	{:catch error}
-		<div>Error ...</div>
-		<div>{JSON.stringify(error)}</div>
-	{/await}
-	<Counter bind:count={page} />
-
 	<div>
 		User:
 		<pre>{JSON.stringify(user, null, 2)}</pre>
@@ -98,7 +85,24 @@
 	</div>
 	<button on:click={signUpWithEmail}> SignUp </button>
 	<button on:click={signInWithEmail}> SignIn </button>
-	<button on:click={signOut}> SignOut </button>
+	<Button on:click={signOut}>Sign out</Button>
+
+	<div class="flex flex-col items-center mt-4">
+		{#await promise}
+			<div>Loading ...</div>
+		{:then { data }}
+			{#each data as item, i (i)}
+				<div>
+					{JSON.stringify(item, null, 2)}
+				</div>
+			{/each}
+		{:catch error}
+			<div>Error ...</div>
+			<div>{JSON.stringify(error)}</div>
+		{/await}
+
+		<Counter bind:count={page} />
+	</div>
 </section>
 
 <style>

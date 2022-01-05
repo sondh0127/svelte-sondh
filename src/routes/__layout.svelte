@@ -1,7 +1,12 @@
 <script lang="ts">
-	import 'uno.css'
+	import 'uno.css';
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
+	import 'carbon-components-svelte/css/all.css';
+	let theme = 'g10'; // "white" | "g10" | "g80" | "g90" | "g100"
+	import { browser } from '$app/env';
+
+	$: browser && document.documentElement.setAttribute('theme', theme);
 </script>
 
 <Header />

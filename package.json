@@ -18,6 +18,8 @@
     "@types/cookie": "^0.4.1",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
+    "carbon-components-svelte": "^0.51.1",
+    "carbon-preprocess-svelte": "^0.6.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.1",
