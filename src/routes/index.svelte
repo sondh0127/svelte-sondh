@@ -87,22 +87,24 @@
 	<button on:click={signInWithEmail}> SignIn </button>
 	<Button on:click={signOut}>Sign out</Button>
 
-	<div class="flex flex-col items-center mt-4">
-		{#await promise}
-			<div>Loading ...</div>
-		{:then { data }}
-			{#each data as item, i (i)}
-				<div>
-					{JSON.stringify(item, null, 2)}
-				</div>
-			{/each}
-		{:catch error}
-			<div>Error ...</div>
-			<div>{JSON.stringify(error)}</div>
-		{/await}
+	{#if user}
+		<div class="flex flex-col items-center mt-4">
+			{#await promise}
+				<div>Loading ...</div>
+			{:then { data }}
+				{#each data as item, i (i)}
+					<div>
+						{JSON.stringify(item, null, 2)}
+					</div>
+				{/each}
+			{:catch error}
+				<div>Error ...</div>
+				<div>{JSON.stringify(error)}</div>
+			{/await}
 
-		<Counter bind:count={page} />
-	</div>
+			<Counter bind:count={page} />
+		</div>
+	{/if}
 </section>
 
 <style>

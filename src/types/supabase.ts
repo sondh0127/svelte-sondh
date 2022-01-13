@@ -17,8 +17,8 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.overlays.id"];
-          created_at?: parameters["rowFilter.overlays.created_at"];
           name?: parameters["rowFilter.overlays.name"];
+          created_at?: parameters["rowFilter.overlays.created_at"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -70,8 +70,8 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.overlays.id"];
-          created_at?: parameters["rowFilter.overlays.created_at"];
           name?: parameters["rowFilter.overlays.name"];
+          created_at?: parameters["rowFilter.overlays.created_at"];
         };
         header: {
           /** Preference */
@@ -87,8 +87,8 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.overlays.id"];
-          created_at?: parameters["rowFilter.overlays.created_at"];
           name?: parameters["rowFilter.overlays.name"];
+          created_at?: parameters["rowFilter.overlays.created_at"];
         };
         body: {
           /** overlays */
@@ -115,22 +115,31 @@ export interface definitions {
      * This is a Primary Key.<pk/>
      */
     id: number;
+    /** Format: text */
+    name?: string;
     /**
      * Format: timestamp with time zone
      * @default now()
      */
     created_at?: string;
-    /** Format: text */
-    name: string;
   };
 }
 
 export interface parameters {
-  /** @description Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferParams: "params=single-object";
-  /** @description Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferReturn: "return=representation" | "return=minimal" | "return=none";
-  /** @description Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferCount: "count=none";
   /** @description Filtering Columns */
   select: string;
@@ -153,10 +162,10 @@ export interface parameters {
   "body.overlays": definitions["overlays"];
   /** Format: bigint */
   "rowFilter.overlays.id": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.overlays.created_at": string;
   /** Format: text */
   "rowFilter.overlays.name": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.overlays.created_at": string;
 }
 
 export interface operations {}
