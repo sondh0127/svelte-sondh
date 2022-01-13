@@ -4,9 +4,7 @@
 
 <script lang="ts">
 	import Counter from '$lib/Counter.svelte';
-	import supabase from '$lib/supabase';
 	import type { definitions } from 'src/types/supabase';
-	import { onMount } from 'svelte';
 	import { Button } from 'carbon-components-svelte';
 
 	let page = 1;
@@ -27,15 +25,6 @@
 
 	let email: string = 'sondh0127@gmail.com';
 	let password: string = 'secret@123';
-
-	let signInRes;
-	async function signInWithEmail() {
-		signInRes = await supabase.auth.signIn({
-			email: email,
-			password: password
-		});
-		getUser();
-	}
 
 	let signUpRes;
 	async function signUpWithEmail() {
@@ -84,7 +73,6 @@
 		</div>
 	</div>
 	<button on:click={signUpWithEmail}> SignUp </button>
-	<button on:click={signInWithEmail}> SignIn </button>
 	<Button on:click={signOut}>Sign out</Button>
 
 	{#if user}

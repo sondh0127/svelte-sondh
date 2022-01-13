@@ -1,8 +1,9 @@
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
-import Unocss from 'unocss/vite'
-import { presetUno, presetAttributify } from 'unocss'
-import { optimizeImports, optimizeCss } from "carbon-preprocess-svelte";
+import Unocss from 'unocss/vite';
+import { presetUno, presetAttributify } from 'unocss';
+import { optimizeImports, optimizeCss } from 'carbon-preprocess-svelte';
+import AutoImport from 'unplugin-auto-import/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,19 +18,31 @@ const config = {
 		target: '#svelte',
 		vite: {
 			plugins: [
+				process.env.NODE_ENV === 'production' && optimizeCss(),
 				Unocss({
-					presets: [
-						presetUno(),
-					]
+					presets: [presetUno()]
 				}),
-				process.env.NODE_ENV === "production" && optimizeCss()
+				AutoImport({
+					dts: 'src/auto-imports.d.ts',
+					imports: [
+						'svelte',
+						'svelte/animate',
+						'svelte/easing',
+						'svelte/motion',
+						'svelte/store',
+						'svelte/transition',
+						{
+							$lib: ['supabase']
+						}
+					]
+				})
 			],
 			server: {
 				port: 4000,
-				open: true,
+				open: true
 			}
 		}
-	},
+	}
 };
 
 export default config;
