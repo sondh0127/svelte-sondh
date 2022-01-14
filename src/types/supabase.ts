@@ -105,6 +105,86 @@ export interface paths {
       };
     };
   };
+  "/todos": {
+    get: {
+      parameters: {
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["todos"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** todos */
+          todos?: definitions["todos"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        body: {
+          /** todos */
+          todos?: definitions["todos"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
 }
 
 export interface definitions {
@@ -123,6 +203,7 @@ export interface definitions {
      */
     created_at?: string;
   };
+  todos: { [key: string]: unknown };
 }
 
 export interface parameters {
@@ -166,6 +247,8 @@ export interface parameters {
   "rowFilter.overlays.name": string;
   /** Format: timestamp with time zone */
   "rowFilter.overlays.created_at": string;
+  /** @description todos */
+  "body.todos": definitions["todos"];
 }
 
 export interface operations {}

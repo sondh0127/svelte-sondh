@@ -22,6 +22,7 @@ specifiers:
   prettier-plugin-svelte: ^2.5.1
   svelte: ^3.46.1
   svelte-check: ^2.2.12
+  svelte-forms: ^2.1.0
   svelte-preprocess: ^4.10.1
   tslib: ^2.3.1
   typescript: ^4.5.4
@@ -35,6 +36,7 @@ dependencies:
   '@supabase/supabase-js': 1.29.1
   '@unocss/reset': 0.22.2
   cookie: 0.4.1
+  svelte-forms: 2.1.0
 
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.10
@@ -1761,6 +1763,10 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
+  /is-promise/4.0.0:
+    resolution: {integrity: sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==}
+    dev: false
+
   /is-typedarray/1.0.0:
     resolution: {integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=}
     dev: false
@@ -2357,6 +2363,12 @@ packages:
       - stylus
       - sugarss
     dev: true
+
+  /svelte-forms/2.1.0:
+    resolution: {integrity: sha512-hT3d5UQ5g5aP5C8qpRWaKct0bwB0NU0wAC+LvL30kSPgOe6wWw0vsJ1foyIAXstFKRe89TTHToUavU+P2KyXAA==}
+    dependencies:
+      is-promise: 4.0.0
+    dev: false
 
   /svelte-hmr/0.14.9_svelte@3.46.1:
     resolution: {integrity: sha512-bKE9+4qb4sAnA+TKHiYurUl970rjA0XmlP9TEP7K/ncyWz3m81kA4HOgmlZK/7irGK7gzZlaPDI3cmf8fp/+tg==}

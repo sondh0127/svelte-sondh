@@ -42,6 +42,7 @@
     "@lukeed/uuid": "^2.0.0",
     "@supabase/supabase-js": "^1.29.1",
     "@unocss/reset": "^0.22.2",
-    "cookie": "^0.4.1"
+    "cookie": "^0.4.1",
+    "svelte-forms": "^2.1.0"
   }
 }
