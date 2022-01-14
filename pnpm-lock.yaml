@@ -9,6 +9,7 @@ specifiers:
   '@types/cookie': ^0.4.1
   '@typescript-eslint/eslint-plugin': ^4.33.0
   '@typescript-eslint/parser': ^4.33.0
+  '@unocss/reset': ^0.22.2
   carbon-components-svelte: ^0.51.3
   carbon-preprocess-svelte: ^0.6.0
   cookie: ^0.4.1
@@ -32,11 +33,12 @@ dependencies:
   '@fontsource/fira-mono': 4.5.0
   '@lukeed/uuid': 2.0.0
   '@supabase/supabase-js': 1.29.1
+  '@unocss/reset': 0.22.2
   cookie: 0.4.1
 
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.10
-  '@sveltejs/kit': 1.0.0-next.228_svelte@3.46.1
+  '@sveltejs/kit': 1.0.0-next.229_svelte@3.46.1
   '@types/cookie': 0.4.1
   '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
   '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.4
@@ -249,8 +251,8 @@ packages:
       esbuild: 0.13.15
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.228_svelte@3.46.1:
-    resolution: {integrity: sha512-77e8G7CcmqHhMyAbtjrAWjRDDgFiZArFhujKGql5YM68TWx0cCoipqGdhK0m3EJ/t/NL+T2YuK/9nvtrSNEK6A==}
+  /@sveltejs/kit/1.0.0-next.229_svelte@3.46.1:
+    resolution: {integrity: sha512-i609g5T58Qdgh/qgO1atak70R7woNuJwWp7GtF/YUOZ9csMR9JPUr1tfX9lSh2I4Ez7j+Dc10RLlQ3szVywfXA==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -531,6 +533,10 @@ packages:
   /@unocss/reset/0.22.1:
     resolution: {integrity: sha512-rN9b7LLN+mW1JfU09VCzr/nYuqpnysvsb6mhGKZvJqS8WfI/sDTpvk1UaQdu4abaMjjgdbIRzI2mWXduDfRF/Q==}
     dev: true
+
+  /@unocss/reset/0.22.2:
+    resolution: {integrity: sha512-aloT+A+P/Lt2dpuYwbEkJJxSdwryQ8wLNrrwd21gaBDFuWfIX731zdKzuaxAWdEhCcY2URV+pSwHiuvJg+gxvw==}
+    dev: false
 
   /@unocss/scope/0.22.1:
     resolution: {integrity: sha512-lTBCWNdfkbbQpSaOiWfSJdJco3w180nWLmCnush4oUi3FZAAHOBD9C9B/kF/5XO0iatb8RER7eqX8ckjDmCZJw==}
@@ -2130,13 +2136,6 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /resolve/1.20.0:
-    resolution: {integrity: sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==}
-    dependencies:
-      is-core-module: 2.8.0
-      path-parse: 1.0.7
-    dev: true
-
   /resolve/1.21.0:
     resolution: {integrity: sha512-3wCbTpk5WJlyE4mSOtDLhqQmGFi0/TD9VPwmiolnk8U0wRgMEktqCXd3vy5buTO3tljvalNvKrjHEfrd2WpEKA==}
     hasBin: true
@@ -2622,7 +2621,7 @@ packages:
     dependencies:
       esbuild: 0.13.15
       postcss: 8.4.5
-      resolve: 1.20.0
+      resolve: 1.21.0
       rollup: 2.62.0
     optionalDependencies:
       fsevents: 2.3.2

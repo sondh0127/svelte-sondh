@@ -13,11 +13,11 @@
 	let email: string = 'sondh0127@gmail.com';
 	let password: string = 'secret@123';
 
-	type Result = Awaited<ReturnType<typeof supabase.auth.signIn>>;
+	type Result = Awaited<ReturnType<typeof supabase.auth.signUp>>;
 
 	let result: Result;
 	async function signInWithEmail() {
-		result = await supabase.auth.signIn({
+		result = await supabase.auth.signUp({
 			email: email,
 			password: password
 		});
@@ -28,7 +28,7 @@
 <Form on:submit={signInWithEmail}>
 	<FormGroup>
 		<div class="flex justify-center">
-			<span class="text-24px font-semibold">Sign In</span>
+			<span class="text-24px font-semibold">Sign Up</span>
 		</div>
 	</FormGroup>
 	{#if result?.error}
@@ -41,15 +41,15 @@
 		<PasswordInput bind:value={password} placeholder="Enter password..." />
 	</FormGroup>
 	<div class="flex space-x-2">
-		<Button type="submit">Sign In</Button>
+		<Button type="submit">Sign Up</Button>
 		<Button
 			type="button"
 			kind="ghost"
 			on:click={() => {
-				goto('/auth/signup');
+				goto('/auth/signin');
 			}}
 		>
-			Sign Up
+			Sign In
 		</Button>
 	</div>
 </Form>

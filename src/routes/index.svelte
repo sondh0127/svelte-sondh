@@ -4,8 +4,8 @@
 
 <script lang="ts">
 	import Counter from '$lib/Counter.svelte';
+	import { user } from '$stores';
 	import type { definitions } from 'src/types/supabase';
-	import { Button } from 'carbon-components-svelte';
 
 	let page = 1;
 	let perPage = 5;
@@ -13,33 +13,6 @@
 	$: from = (page - 1) * perPage;
 	$: to = page * (perPage - 1);
 	$: promise = supabase.from<definitions['overlays']>('overlays').select('*').range(from, to);
-
-	let user;
-	function getUser() {
-		user = supabase.auth.user();
-	}
-
-	onMount(() => {
-		getUser();
-	});
-
-	let email: string = 'sondh0127@gmail.com';
-	let password: string = 'secret@123';
-
-	let signUpRes;
-	async function signUpWithEmail() {
-		if (!email || !password) return;
-		signUpRes = await supabase.auth.signUp({
-			email,
-			password
-		});
-		getUser();
-	}
-
-	async function signOut() {
-		await supabase.auth.signOut();
-		getUser();
-	}
 </script>
 
 <svelte:head>
@@ -58,24 +31,7 @@
 		to your new<br />SvelteKit app
 	</h1>
 
-	<div>
-		User:
-		<pre>{JSON.stringify(user, null, 2)}</pre>
-	</div>
-	<div class="flex flex-col items-start	 justify-center">
-		<div>
-			<label for="email"> Email: </label>
-			<input id="email" bind:value={email} />
-		</div>
-		<div>
-			<label for="password"> Password: </label>
-			<input id="password" bind:value={password} />
-		</div>
-	</div>
-	<button on:click={signUpWithEmail}> SignUp </button>
-	<Button on:click={signOut}>Sign out</Button>
-
-	{#if user}
+	{#if $user}
 		<div class="flex flex-col items-center mt-4">
 			{#await promise}
 				<div>Loading ...</div>

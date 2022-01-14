@@ -1,6 +1,21 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { Button, Tag } from 'carbon-components-svelte';
+	import { user } from '$stores';
 	import logo from './svelte-logo.svg';
+
+	function getUser() {
+		$user = supabase.auth.user();
+	}
+
+	onMount(() => {
+		getUser();
+	});
+
+	async function signOut() {
+		await supabase.auth.signOut();
+		$user = null;
+	}
 </script>
 
 <header>
@@ -28,8 +43,11 @@
 		</svg>
 	</nav>
 
-	<div class="corner">
-		<!-- TODO put something else here? github link? -->
+	<div class="flex items-center space-x-2">
+		{#if $user}
+			<Tag>{$user.email}</Tag>
+			<Button kind="secondary" on:click={signOut}>Sign out</Button>
+		{/if}
 	</div>
 </header>
 

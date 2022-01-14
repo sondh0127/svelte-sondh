@@ -1,5 +1,7 @@
 <script lang="ts">
 	import 'uno.css';
+	import '@unocss/reset/tailwind.css';
+
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
 	import 'carbon-components-svelte/css/all.css';

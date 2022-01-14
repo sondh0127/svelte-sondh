@@ -2,7 +2,7 @@
   "name": "svelte-sondh",
   "version": "0.0.1",
   "scripts": {
-    "dev": "pnpm openapi && svelte-kit dev",
+    "dev": "pnpm openapi && svelte-kit dev --port 4000 --open",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
@@ -41,6 +41,7 @@
     "@fontsource/fira-mono": "^4.5.0",
     "@lukeed/uuid": "^2.0.0",
     "@supabase/supabase-js": "^1.29.1",
+    "@unocss/reset": "^0.22.2",
     "cookie": "^0.4.1"
   }
 }

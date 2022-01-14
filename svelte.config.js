@@ -4,6 +4,7 @@ import Unocss from 'unocss/vite';
 import { presetUno, presetAttributify } from 'unocss';
 import { optimizeImports, optimizeCss } from 'carbon-preprocess-svelte';
 import AutoImport from 'unplugin-auto-import/vite';
+import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,6 +18,11 @@ const config = {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
 		vite: {
+			resolve: {
+				alias: {
+					$stores: path.resolve('src/stores/')
+				}
+			},
 			plugins: [
 				process.env.NODE_ENV === 'production' && optimizeCss(),
 				Unocss({
@@ -36,11 +42,7 @@ const config = {
 						}
 					]
 				})
-			],
-			server: {
-				port: 4000,
-				open: true
-			}
+			]
 		}
 	}
 };
