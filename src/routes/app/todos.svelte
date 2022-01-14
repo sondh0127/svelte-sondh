@@ -2,9 +2,13 @@
 	import { enhance } from '$lib/form';
 	import type { Load } from '@sveltejs/kit';
 
+	function getTodos() {
+		return supabase.from<definitions['todos']>('todos').select('*');
+	}
+
 	// see https://kit.svelte.dev/docs#loading
 	export const load: Load = async ({ fetch }) => {
-		const res = await supabase.from<definitions['todos']>('todos').select('*');
+		const res = await getTodos();
 
 		if (res.error) {
 			return {
@@ -39,17 +43,14 @@
 	export let todos: Todo[];
 	export let count: number;
 
-	async function patch(res: Response) {
-		const todo = await res.json();
-
-		todos = todos.map((t) => {
-			if (t.id === todo.id) return todo;
-			return t;
-		});
-	}
-
 	const text = sfield('text', '', [required()]);
 	const addForm = sform(text);
+
+	async function refetch() {
+		const res = await getTodos();
+		todos = res.data;
+		count = res.count;
+	}
 
 	async function onSubmitCreate() {
 		if ($addForm.valid) {
@@ -67,6 +68,7 @@
 			}
 
 			addForm.reset();
+			refetch();
 		}
 	}
 
@@ -74,6 +76,7 @@
 		const res = await supabase.from<definitions['todos']>('todos').update(todo).match({
 			id: todo.id
 		});
+		refetch();
 
 		if (res.error) {
 			return {
@@ -86,6 +89,7 @@
 		const res = await supabase.from<definitions['todos']>('todos').delete().match({
 			id: todo.id
 		});
+		refetch();
 
 		if (res.error) {
 			return {
